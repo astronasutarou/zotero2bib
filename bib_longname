@@ -1,0 +1,24 @@
+#!/usr/bin/perl
+
+use warnings;
+use strict;
+
+sub TeamWithBrace($);
+
+foreach(<>) {
+				if (/author = {(.*)}/) {
+								my $StrAuthor = $1;
+								print "\tauthor = {".TeamWithBrace($StrAuthor)."},\n";
+				} else {
+								print;
+				}
+}
+
+sub TeamWithBrace($) {
+				(my $Line) = @_;
+				return $Line unless $Line =~ /team/i;
+
+				my @ArrName = split(/\s?and\s?/, $Line);
+				foreach(@ArrName) {$_ = "{".$_."}";}
+				return join(' and ', @ArrName);
+}
