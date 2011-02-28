@@ -3,8 +3,8 @@
 target=${1:-src.bib}
 output=${2:-master.bib}
 
-./bib_texchr ${target} \
-		|./bib_longname \
+bib_texchr ${target} \
+		|bib_longname \
 		|sed 's/{Astronomy and Astrophysics/{\\aap/' \
 		|sed 's/{\(The \)*Astrophysical Journal/{\\apj/' \
 		|sed 's/{\\apj Supplement Series/{\\apjs/' \
