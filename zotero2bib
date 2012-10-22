@@ -5,6 +5,7 @@ output=${2:-master.bib}
 
 bib_texchr ${target} \
 		|bib_longname \
+		|sed 's/{Annual Review of Astronomy and Astrophysics/{\\araa/' \
 		|sed 's/{Astronomy and Astrophysics Supplement Series/{\\aaps/' \
 		|sed 's/{\(The \)*Astrophysical Journal Supplement Series/{\\apjs/' \
 		|sed 's/{Astronomy and Astrophysics/{\\aap/' \
