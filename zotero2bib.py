@@ -10,7 +10,7 @@ def wrap_name_with_brace(line):
   if line.find('author = {') == -1:
     return line
   else:
-    regex = re.search(ur'(.*author = {)(.*)(},\s*)$', line)
+    regex = re.search(ur'(.*author = {)(.*)(},?\s*)$', line)
     pre,authors,post = regex.groups()
     names = re.split(ur'\s+and\s+', authors)
     newnames = []
@@ -187,7 +187,7 @@ def convert_greece(line):
 
 
 if __name__ == '__main__':
-  parser = ap('Convert Zotero .bib file.')
+  parser = ap(description='Convert Zotero .bib file.')
   parser.add_argument(
     'input_bib', metavar='src', type=str,
     help='source .bib file to be converted.')
