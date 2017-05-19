@@ -6,6 +6,15 @@ from __future__ import (
 import re, codecs
 from argparse import ArgumentParser as ap
 
+def convert_date_year(line):
+  try:
+    regex = re.search(ur'^\s*date = {(....)', line)
+    year = regex.groups()[0]
+    line = '        year = {{{}}},\n{}'.format(year, line)
+    return line
+  except:
+    return line
+
 def wrap_name_with_brace(line):
   if line.find('author = {') == -1:
     return line
@@ -37,6 +46,8 @@ def convert_signs(line):
   line = line.replace(ur'≥', u'''${\\ge}$''')
   line = line.replace(ur'≤', u'''${\\le}$''')
   line = line.replace(ur'∼', u'''{\\textasciitilde}''')
+  line = line.replace(ur'Ø,', u'''{\O}''')
+  line = line.replace(ur'ø', u'''{\o}''')
   return line
 
 def convert_bar(line):
@@ -213,6 +224,7 @@ if __name__ == '__main__':
         inside_elem += line.count(ur'{')
         inside_elem -= line.count(ur'}')
         line = re.sub(ur'\n','',line)
+        line = convert_date_year(line)
         writeln += line
         if inside_elem==1:
           writeln = wrap_name_with_brace(writeln)
