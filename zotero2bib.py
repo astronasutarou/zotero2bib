@@ -1,10 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from __future__ import (
-  absolute_import, division, print_function,unicode_literals)
-
-import re, codecs
 from argparse import ArgumentParser as ap
+import re, codecs
+
 
 def convert_date_year(line):
   try:
